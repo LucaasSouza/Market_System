@@ -44,7 +44,7 @@ function addItem(){
 
     var flag = false
     for(var i = 0; i < listItens.length && flag == false; i++){
-        if(item.name == listItens[i].nome){
+        if(item.name == listItens[i].name){
             flag = true
             alert("Esse nome já foi cadastrado!")
             addItem()
@@ -129,7 +129,7 @@ function deleteItem(){
 
 var totalValue = 0
 function shop(){
-    var toShop = Number(prompt("Digite o código do item"))
+    var toShop = Number(prompt("Digite o código do item:"))
     var flag = false
     for(var i = 0; i < listItens.length && flag == false; i++){
         if(toShop == listItens[i].code){
@@ -149,7 +149,7 @@ function shop(){
 
                 case 2:
                     alert("O preço final é de R$" + totalValue)
-                    var shopValue = parseFloat(prompt("Digite o valor pago pelo cliente"))
+                    var shopValue = parseFloat(prompt("Digite o valor pago pelo cliente:"))
                     alert("Troco R$" + (shopValue - totalValue))
 
                     var choose = Number(prompt("Deseja imprimir a notinha? \n1- Sim \n2- Não"))
@@ -194,6 +194,6 @@ function shop(){
     }
     if(flag == false){
         console.log("Item não encontrado!")
-        
+        shop()
     }
 }
