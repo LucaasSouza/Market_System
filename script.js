@@ -38,7 +38,8 @@ function addItem(){
     var item = {
         code: newID,
         name: prompt("Digite o nome do item:"),
-        value: parseFloat(prompt("Digite o valor do produto em reais(R$):"))
+        value: parseFloat(prompt("Digite o valor do produto em reais(R$):")),
+        unityItem: null
     }
     newID = newID +1
 
@@ -47,7 +48,7 @@ function addItem(){
         if(item.name == listItens[i].name){
             flag = true
             alert("Esse nome já foi cadastrado!")
-            addItem()
+            firstMenu()
         }
     }
     if(flag == false){
@@ -136,9 +137,10 @@ function shop(){
             flag = true
             console.log("Item encontrado!")
             var unity = Number(prompt("Quantas unidades desse produto?"))
+            listItens[i].unityItem = unity
+            listShop.push(listItens[i])
             var valueItem = listItens[i].value * unity
             console.log(valueItem)
-            listShop.push(listItens[i])
             totalValue = totalValue + valueItem
 
             var choose = Number(prompt("Deseja continuar, concluir ou cancelar a compra? \n1- Continuar \n2- Concluir \n3- Cancelar"))
@@ -152,20 +154,23 @@ function shop(){
                     var shopValue = parseFloat(prompt("Digite o valor pago pelo cliente:"))
                     alert("Troco R$" + (shopValue - totalValue))
 
-                    var choose = Number(prompt("Deseja imprimir a notinha? \n1- Sim \n2- Não"))
+                    var choose = Number(prompt("Deseja imprimir o comprovante? \n1- Sim \n2- Não"))
                     switch(choose){
                         case 1:
                             for(var i = 0; i < listShop.length; i++){
                                 console.log("-------Comprovante-------")
                                 while(listShop.length > 0){
                                     console.log("Nome do item: " + listShop[i].name)
-                                    console.log("Valor do item: R$" + listShop[i].value)
-                                    console.log("Quantidade: " + unity)
+                                    console.log("Valor do item(Unidade): R$" + listShop[i].value)
+                                    console.log("Valor final do item: R$" + valueItem)
+                                    console.log("Quantidade: " + listShop[i].unityItem)
                                     listShop.splice(i,1)
                                 }
+                                console.log("-------------------------")
                                 console.log("Valor Total: R$" + totalValue)
                                 console.log("Valor Pago: R$" + shopValue)
                                 console.log("Troco: R$" + (shopValue - totalValue))
+                                console.log("Mercado Coisa Boa agradece")
                             }
                             if(listShop.length == 0){
                                 alert("Compra finalizada!")
@@ -190,7 +195,7 @@ function shop(){
                     firstMenu()
                 break;
             }
-            }
+        }
     }
     if(flag == false){
         console.log("Item não encontrado!")
