@@ -38,9 +38,10 @@ function addItem(){
     var item = {
         code: newID,
         name: prompt("Digite o nome do item:"),
-        value: parseFloat(prompt("Digite o valor do produto em reais(R$):"))        
+        value: parseFloat(prompt("Digite o valor do produto em reais(R$):"))
     }
     newID = newID +1
+
     var flag = false
     for(var i = 0; i < listItens.length && flag == false; i++){
         if(item.name == listItens[i].nome){
@@ -134,9 +135,12 @@ function shop(){
         if(toShop == listItens[i].code){
             flag = true
             console.log("Item encontrado!")
+            var unity = Number(prompt("Quantas unidades desse produto?"))
+            var valueItem = listItens[i].value * unity
+            console.log(valueItem)
             listShop.push(listItens[i])
-            totalValue = totalValue + listItens[i].value
-            
+            totalValue = totalValue + valueItem
+
             var choose = Number(prompt("Deseja continuar, concluir ou cancelar a compra? \n1- Continuar \n2- Concluir \n3- Cancelar"))
             switch(choose){
                 case 1:
@@ -156,6 +160,7 @@ function shop(){
                                 while(listShop.length > 0){
                                     console.log("Nome do item: " + listShop[i].name)
                                     console.log("Valor do item: R$" + listShop[i].value)
+                                    console.log("Quantidade: " + unity)
                                     listShop.splice(i,1)
                                 }
                                 console.log("Valor Total: R$" + totalValue)
